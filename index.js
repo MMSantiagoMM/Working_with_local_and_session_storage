@@ -43,15 +43,20 @@ BtnBuscar.addEventListener('click',(event)=>{
     let keyStorage = "productos" 
     let localS = JSON.parse(localStorage.getItem(keyStorage))
     let test = localS.find((element)=>element.nombre == campoBuscar.value)
-    let v1=test.imagen.split("\\")
-    v1=v1.slice(1,)
-    v1[0]="img"
-    v1=v1.join("/")
-    console.log(v1)
-    textoBusqueda.innerHTML = test.nombre + "<br>" + test.presentacion + "<br>" + test.precio + "<br>" + test.imagen
-
     console.log(test.imagen)
-    
+    let v1=test.imagen.split("\\")
+    console.log(v1)
+    v1=v1.slice(1)
+    console.log(v1)
+    v1[0]="/img"
+    v1=v1.join("/")
+    let v2 = document.createElement("img")
+    v2.setAttribute('src',v1)
+    v2.style = "width:200px"
+    textoBusqueda.innerHTML = test.nombre + "<br>" + test.presentacion + "<br>" + test.precio + "<br>"
+
+    textoBusqueda.appendChild(v2)
+
     
     
 })
