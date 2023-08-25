@@ -53,7 +53,7 @@ BtnBuscar.addEventListener('click',(event)=>{
     let v2 = document.createElement("img")
     v2.setAttribute('src',v1)
     v2.style = "width:200px"
-    textoBusqueda.innerHTML = test.nombre + "<br>" + test.presentacion + "<br>" + test.precio + "<br>"
+    textoBusqueda.innerHTML = "Producto: " + test.nombre + "<br>" + "Presentación: " + test.presentacion + "<br>" + "Precio: " + test.precio + "<br>"
 
     textoBusqueda.appendChild(v2)
 

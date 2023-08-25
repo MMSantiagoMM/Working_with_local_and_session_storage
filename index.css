@@ -1,0 +1,11 @@
+.second{
+position: absolute;
+left: 1300px;
+top: 100px;
+}
+
+.textoBusqueda{
+    margin: 50px 0 0 100px;
+    width: 300px;
+    padding: 25px;
+}
