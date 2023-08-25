@@ -1,59 +1,57 @@
-
-let Nombre = document.querySelector(".nombre-pro")
-let Presentacion = document.querySelector(".presentacion-pro")
+let Nombre = document.querySelector(".nombre-pro");
+let Presentacion = document.querySelector(".presentacion-pro");
 let Precio = document.querySelector(".precio-pro")
 let Imagen = document.querySelector(".imagen-pro")
 let Boton = document.querySelector(".boton")
-let Buscar = document.querySelector(".buscar")
-let lista = []
+let BtnBuscar = document.querySelector(".buscar")
+let campoBuscar = document.querySelector('.buscar-pro')
+let textoBusqueda = document.querySelector('.textoBusqueda')
 
-Boton.addEventListener('click',(event)=>{
-    event.preventDefault()
-    obtenerDatos()
+
+Boton.addEventListener('click',()=>{
+    guardarDatos()
+    alert("Los datos fueron cargados")
+
 })
 
-function obtenerDatos(){
+function guardarDatos(){
     if(!Nombre.value || !Presentacion.value || !Precio.value || !Imagen.value){
-        alert("Debes rellenar todos los campos")
-        return;
+        alert("Todos los campos deben de estar llenos")
     }
-    let datos = {
+    let producto={
         nombre: Nombre.value,
         presentacion: Presentacion.value,
-        precio : Precio.value,
-        imagen : Imagen.value
+        precio: Precio.value,
+        imagen: Imagen.value
     }
-
-    console.log(datos)
-    guardarDatos(datos)
-    
-}
-let productosEnLocal = "productos"
-function guardarDatos(objecto){
-    let productos = []
-    let productosGuardadosEnLocal = JSON.parse(localStorage.getItem(productosEnLocal))
-    if(productosGuardadosEnLocal){
-        productos = productosGuardadosEnLocal
-    }
-    productos.push(objecto)
-
-    localStorage.setItem(productosEnLocal,JSON.stringify(productos))
-
+    cargarDatos(producto)
 }
 
-Buscar.addEventListener('click',(event)=>{
+function cargarDatos(object){
+    let keyStorage = "productos" 
+    let listProducts = []
+    let localS = JSON.parse(localStorage.getItem(keyStorage))
+    if(localS){
+        listProducts = localS
+    }
+    listProducts.push(object)
+    localStorage.setItem(keyStorage,JSON.stringify(listProducts))
+}
+
+BtnBuscar.addEventListener('click',(event)=>{
     event.preventDefault()
-    let busqueda = prompt("Ingrese el nombre del producto")
-    let productosGuardadosEnLocal = JSON.parse(localStorage.getItem(productosEnLocal))
+    let keyStorage = "productos" 
+    let localS = JSON.parse(localStorage.getItem(keyStorage))
+    let test = localS.find((element)=>element.nombre == campoBuscar.value)
+    let v1=test.imagen.split("\\")
+    v1=v1.slice(1,)
+    v1[0]="img"
+    v1=v1.join("/")
+    console.log(v1)
+    textoBusqueda.innerHTML = test.nombre + "<br>" + test.presentacion + "<br>" + test.precio + "<br>" + test.imagen
 
-    for (let i = 0; i < productosGuardadosEnLocal.length; i++) {
-        if(productosGuardadosEnLocal[i].nombre == busqueda){
-            console.log(productosGuardadosEnLocal[i])
-        }
-        
-    }
+    console.log(test.imagen)
+    
+    
+    
 })
-
-
-
-
