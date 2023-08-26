@@ -14,6 +14,8 @@ Boton.addEventListener('click',()=>{
 
 })
 
+
+
 function guardarDatos(){
     if(!Nombre.value || !Presentacion.value || !Precio.value || !Imagen.value){
         alert("Todos los campos deben de estar llenos")
@@ -39,7 +41,18 @@ function cargarDatos(object){
 }
 
 BtnBuscar.addEventListener('click',(event)=>{
-    event.preventDefault()
+buscarProductos()
+    
+})
+
+campoBuscar.addEventListener('keydown',(event)=>{
+    if( event.key== "Enter"){
+        buscarProductos()
+        
+    }
+})
+
+function buscarProductos(){
     let keyStorage = "productos" 
     let localS = JSON.parse(localStorage.getItem(keyStorage))
     let test = localS.find((element)=>element.nombre == campoBuscar.value)
@@ -58,5 +71,4 @@ BtnBuscar.addEventListener('click',(event)=>{
     textoBusqueda.appendChild(v2)
 
     
-    
-})
+}
