@@ -14,8 +14,8 @@ function buscarProductos() {
     let keyStorage = "productos"
     let localS = JSON.parse(localStorage.getItem(keyStorage))
     let test = localS.find((element) => element.nombre == campoBuscar.value)
-    console.log(test.imagen)
-    let v1 = test.imagen.split("\\")
+
+    /* let v1 = test.imagen.split("\\")
     console.log(v1)
     v1 = v1.slice(1)
     console.log(v1)
@@ -23,8 +23,8 @@ function buscarProductos() {
     v1 = v1.join("/")
     let v2 = document.createElement("img")
     v2.setAttribute('src', v1)
-    v2.style = "width:200px"
-    textoBusqueda.innerHTML = "Producto: " + test.nombre + "<br>" + "Presentación: " + test.presentacion + "<br>" + "Precio: " + test.precio + "<br>"
+    v2.style = "width:200px" */
+    textoBusqueda.innerHTML = `Producto: ${test.nombre} <br> Presentación: ${test.presentacion} <br> Precio:   ${test.precio} <br><img src="${test.imagen}" width="40%">`
     textoBusqueda.appendChild(v2)
 }
 
@@ -90,7 +90,7 @@ function mostrarDatos() {
         <td>${item.nombre} </td>
         <td>${item.presentacion} </td>
         <td>${item.precio} </td>
-        <td><img src="${item.imagen}" width="20%"></td>
+        <td><img src="${item.imagen}" width="30%"></td>
         <td>
             <span onclick="editarPro(${index})"class="btn btn-success">Editar</span>  
             <span onclick="btnEliminar(${index})" class="btn btn-danger"> Eliminar </span> 
@@ -136,16 +136,14 @@ function editarPro(position) {
     Nombre.value = listProducts[position].nombre
     Presentacion.value = listProducts[position].presentacion
     Precio.value = listProducts[position].precio
+    Imagen.value = listProducts[position].imagen
 
     botonActualizar.classList.toggle("d-none")
     Boton.classList.toggle("d-none")
 
 
 
-    botonActualizar.addEventListener('click',(event)=>{
-        event.preventDefault()
-/*         botonActualizar.classList.toggle("d-none")
-        Boton.classList.toggle("d-none") */
+    botonActualizar.addEventListener('click',()=>{
         listProducts[position].nombre = Nombre.value
         listProducts[position].presentacion = Presentacion.value
         listProducts[position].precio = Precio.value
@@ -155,12 +153,16 @@ function editarPro(position) {
         localStorage.setItem(keyStorage, JSON.stringify(listProducts))
         alert("Productos actualizados con exito")
 
-/*         botonActualizar.classList.toggle("d-none")
-        Boton.classList.toggle("d-none") */
+           botonActualizar.classList.toggle("d-none")
+        Boton.classList.toggle("d-none")
         limpiarTable()
         mostrarDatos()
+        Nombre.value = ""
+        Presentacion.value = ""
+        Precio.value = ""
+        Imagen.value = ""
     })
-
+ 
 
 }
 
